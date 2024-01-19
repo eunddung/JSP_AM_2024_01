@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 public class printDanServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		response.setContentType("text/html;charset=UTF-8");
 
 		String inputedDan = request.getParameter("dan");
 		String inputedLimit = request.getParameter("limit");
+		String inputedColor = request.getParameter("color");
 
 		if (inputedDan == null) {
 			inputedDan = "1";
@@ -21,15 +21,19 @@ public class printDanServlet extends HttpServlet {
 		if (inputedLimit == null) {
 			inputedLimit = "1";
 		}
-
+		if (inputedColor == null) {
+			inputedLimit = "black";
+		}
 
 		int dan = Integer.parseInt(inputedDan);
 		int limit = Integer.parseInt(inputedLimit);
 
-		response.getWriter().append(String.format("==%d단==<br>", dan));
+		response.getWriter().append(String.format("<div style=\"color:%s\";>==%d단==</div>", inputedColor, dan));
 
 		for (int i = 1; i <= limit; i++) {
-			response.getWriter().append(String.format("%d * %d = %d<br>", dan, i, dan * i));
+			response.getWriter().append(
+					String.format("<div style=\"color:%s\";>%d * %d = %d</div>", inputedColor, dan, i, dan * i));
 		}
 	}
+
 }
