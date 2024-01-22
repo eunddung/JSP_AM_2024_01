@@ -1,15 +1,20 @@
-package com.KoreaIT.java.Jsp_AM;
+package com.KoreaIT.java.Jsp_AM.servlet;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+
+import com.KoreaIT.java.Jsp_AM.util.DBUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 @WebServlet("/article/list")
 public class ArticleListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,15 +31,15 @@ public class ArticleListServlet extends HttpServlet {
 		String user = "root";
 		String password = "";
 		Connection conn = null;
+
 		try {
-			conn = DriverManager.getConnection(url, "root", "");
+			conn = DriverManager.getConnection(url, user, password);
 			response.getWriter().append("연결 성공!");
-			DBUtil dbUtil = new DBUtil(request, response);
+
 			String sql = "SELECT * FROM article;";
 
-			List<Map<String, Object>> articleRows = dbUtil.selectRows(conn, sql);
+			List<Map<String, Object>> articleRows = DBUtil.selectRows(conn, sql);
 
-//			response.getWriter().append(articleRows.toString());
 			request.setAttribute("articleRows", articleRows);
 			request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
 
