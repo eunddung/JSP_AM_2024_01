@@ -41,6 +41,11 @@
 				form.loginId.focus();
 				return;
 			}
+			if (loginId == sql.loginId) {
+				alert('이미 사용중인 아이디입니다');
+				form.loginId.focus();
+				return;
+			}
 			if (loginPw.length == 0) {
 				alert('비밀번호를 입력해주세요');
 				form.loginPw.focus();
