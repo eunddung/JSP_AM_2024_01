@@ -17,7 +17,6 @@
 
 	<script type="text/javascript">
 		var LoginForm__submitDone = false;
-
 		function LoginForm__submit(form) {
 			if (LoginForm__submitDone) {
 				alert('이미 처리중입니다');
@@ -25,10 +24,8 @@
 			}
 			var loginId = form.loginId.value.trim();
 			var loginPw = form.loginPw.value.trim();
-
 			console.log('form.loginId.value : ' + loginId);
 			console.log('form.loginPw.value : ' + loginPw);
-
 			if (loginId.length == 0) {
 				alert('아이디를 입력해주세요');
 				form.loginId.focus();
@@ -39,13 +36,10 @@
 				form.loginPw.focus();
 				return;
 			}
-
 			LoginForm__submitDone = true;
 			form.submit();
-
 		}
 	</script>
-
 	<form method="POST" action="doLogin"
 		onsubmit="LoginForm__submit(this); return false;">
 		<div>
@@ -56,14 +50,10 @@
 			로그인 비밀번호 : <input autocomplete="off" type="text"
 				placeholder="비밀번호를 입력해주세요" name="loginPw" />
 		</div>
-
 		<button type="submit">로그인</button>
 	</form>
-
-
 	<div>
 		<a style="color: green" href="../article/list">리스트로 돌아가기</a>
 	</div>
-
 </body>
 </html>
